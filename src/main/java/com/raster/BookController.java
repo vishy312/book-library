@@ -34,7 +34,7 @@ public class BookController {
 		
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/library")
 	public String getHomePage(@Validated @RequestParam(name="sort", required=false, defaultValue="false") boolean sortByRating, @Validated @RequestParam(name="category", required=false, defaultValue="") String category, Model model) {
 		Pageable pageable;
 		if(sortByRating) {
@@ -50,7 +50,7 @@ public class BookController {
 		return "bookpage";
 	}
 	
-	@PostMapping("/")
+	@PostMapping("/library")
 	public String submitForm(@ModelAttribute BookQuery bookQuery, Model model) {
 		Pageable pageable;
 		if(bookQuery.isSort()) {
@@ -63,6 +63,6 @@ public class BookController {
 		
 		model.addAttribute("books", books);
 		
-		return "bookpage";
+		return "redirect:/bookpage";
 	}
 }
