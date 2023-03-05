@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,6 +44,22 @@ public class BookController {
 		}
 		
 		Page<Book> books = bookService.getBooks(pageable, category);
+		
+		model.addAttribute("books", books);
+		
+		return "bookpage";
+	}
+	
+	@PostMapping("/")
+	public String submitForm(@ModelAttribute BookQuery bookQuery, Model model) {
+		Pageable pageable;
+		if(bookQuery.isSort()) {
+			pageable = PageRequest.of(0, 10, Direction.ASC, "book_depository_stars");
+		}else {
+			pageable = PageRequest.of(0, 10, Direction.ASC, "name");
+		}
+		
+		Page<Book> books = bookService.getBooks(pageable, bookQuery.getCategory());
 		
 		model.addAttribute("books", books);
 		

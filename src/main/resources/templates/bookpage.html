@@ -10,11 +10,11 @@
     <body>
         <nav><h3 class="site-name">Book Library</h3></nav>
         <main>
-            <form >
-                <input type="text" name="category" id="category" placeholder="Enter Category">
+            <form action="#" th:action="@{/}" th:object="${bookQuery}">
+                <input type="text" name="category" id="category" th:field="*{category}" placeholder="Enter Category">
                 <div class="half-form">
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" name="sortByRating" th:field="*{sortByRating}">
                         <span class="slider round"></span>
                     </label>
                     <button type="submit" id="get-btn">Get</button>
