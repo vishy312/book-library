@@ -98,4 +98,5 @@ form{
 	border-radius: 15px;
 	color: white;
 	font-weight: bolder;
+	cursor: pointer;
 }
